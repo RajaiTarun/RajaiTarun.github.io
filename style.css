@@ -1,0 +1,341 @@
+/* Modern SSD Course Website Styles */
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #7c3aed;
+    --accent-color: #06b6d4;
+    --dark-bg: #0f172a;
+    --light-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     */
+     background: #DAE2F8;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #D6A4A4, #DAE2F8);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #D6A4A4, #DAE2F8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    background-attachment: fixed;
+    padding: 20px 0;
+}
+
+/* Header Styling */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+h3 {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Table Container */
+table {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    margin: 20px auto;
+    border: none !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+table:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* Navigation Links */
+td a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+td a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transition: width 0.3s ease;
+}
+
+td a:hover {
+    color: var(--secondary-color);
+}
+
+td a:hover::after {
+    width: 100%;
+}
+
+/* Section Headers */
+b {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Paragraphs */
+p {
+    margin: 15px 0;
+    text-align: justify;
+}
+
+/* Lists */
+ul {
+    margin: 15px 0 15px 30px;
+}
+
+li {
+    margin: 10px 0;
+    position: relative;
+    padding-left: 10px;
+}
+
+li::before {
+    content: '▸';
+    position: absolute;
+    left: -15px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Horizontal Rules */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    margin: 20px 0;
+}
+
+/* Table Headers */
+th {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* Table Data */
+td {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Table Rows */
+tr:hover {
+    background: var(--light-bg);
+    transition: background 0.3s ease;
+}
+
+/* Light Text Rows */
+.light-text-row {
+    color: var(--text-secondary) !important;
+}
+
+.light-text-row td {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+/* Strikethrough Text */
+s {
+    color: #ef4444;
+    text-decoration: line-through;
+}
+
+/* Nested Tables */
+table table {
+    width: 100% !important;
+    margin: 10px 0;
+    box-shadow: var(--shadow-sm);
+}
+
+table table th {
+    background: linear-gradient(135deg, #10b981, #059669);
+    padding: 12px;
+}
+
+table table td {
+    padding: 12px;
+}
+
+/* Time Display */
+#txt {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 10px;
+    background: var(--light-bg);
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Emoji Styling */
+body {
+    font-variant-emoji: emoji;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h3 {
+        font-size: 0.95rem;
+    }
+    
+    table {
+        width: 100% !important;
+        font-size: 14px;
+    }
+    
+    td {
+        padding: 12px;
+    }
+    
+    th {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Add animation to all tables */
+table {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Link Buttons Enhancement */
+td a[href*="pdf"],
+td a[href*="notion"],
+td a[href*="github"] {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 2px;
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+td a[href*="pdf"]:hover,
+td a[href*="notion"]:hover,
+td a[href*="github"]:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Footer Styling */
+table:last-child {
+    background: transparent;
+    box-shadow: none;
+}
+
+table:last-child td {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+}
+
+/* Improved Table Borders */
+table[border="1"] {
+    border: 2px solid var(--border-color) !important;
+}
+
+table[border="1"] td,
+table[border="1"] th {
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    
+    table {
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+}
