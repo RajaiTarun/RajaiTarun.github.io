@@ -1,55 +1,511 @@
-<!-- 
-Online HTML, CSS and JavaScript editor to run code online.
--->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Browser</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tarun Rajai · Backend & Systems Engineer (and Mutex the cat)</title>
+  <meta name="description" content="Hey, I'm Tarun: M.Tech CS at IIIT Hyderabad. I build backend systems that stay correct under contention. My QA team is a cat named Mutex." />
+  <meta name="theme-color" content="#fff6ea" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tarun Rajai · Backend & Systems Engineer" />
+  <meta property="og:description" content="Race conditions, sagas, a Unix shell in C++, and a cat named Mutex." />
+  <meta property="og:url" content="https://rajaitarun.github.io/" />
+  <meta property="og:image" content="https://rajaitarun.github.io/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,100,1;1,9..144,400..900,100,1&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <h1>
-    RAJAI TARUN
-  </h1>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <img src="photo.jpg" alt="photo" width="200" height="200">
-  
-  
-  <ul>
-    <li>Name : Rajai Tarun</li>
-    <li>Profession : Student</li>
-    <li>Email : tarunkrajai@gmail.com</li>
-  </ul>
-  <p>
-    Hey, I'm Tarun! A student interested in technology. I enjoy solving problems. When I'm not working, you'll find me sleeping.
-  </p>
+  <!-- ═════════════ Reusable drawings ═════════════ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="paw" viewBox="0 0 24 24"><ellipse cx="12" cy="16.2" rx="5.6" ry="4.6"/><circle cx="5.8" cy="10.6" r="2.4"/><circle cx="9.6" cy="6.4" r="2.4"/><circle cx="14.4" cy="6.4" r="2.4"/><circle cx="18.2" cy="10.6" r="2.4"/></symbol>
+      <symbol id="cathead" viewBox="0 0 40 36">
+        <path d="M5 17 7 2l10 8Z M35 17 33 2l-10 8Z" fill="currentColor" stroke="#221c18" stroke-width="2" stroke-linejoin="round"/>
+        <ellipse cx="20" cy="21" rx="16" ry="13" fill="currentColor" stroke="#221c18" stroke-width="2"/>
+        <circle cx="14" cy="20" r="2.2" fill="#221c18"/><circle cx="26" cy="20" r="2.2" fill="#221c18"/>
+        <path d="M18.4 24.5h3.2L20 26.4Z" fill="#ff8fab"/>
+      </symbol>
+      <symbol id="cathead-mad" viewBox="0 0 40 36">
+        <path d="M5 17 3 5l12 6Z M35 17 37 5l-12 6Z" fill="currentColor" stroke="#221c18" stroke-width="2" stroke-linejoin="round"/>
+        <ellipse cx="20" cy="21" rx="16" ry="13" fill="currentColor" stroke="#221c18" stroke-width="2"/>
+        <path d="M10.5 17.5l6 2.4M29.5 17.5l-6 2.4" stroke="#221c18" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M16 27q4-3 8 0" stroke="#221c18" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </symbol>
+    </defs>
+  </svg>
 
-  <h2>My Education</h2>
+  <!-- ═════════════ Nav ═════════════ -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="#top" aria-label="Tarun Rajai, back to top">
+        <svg class="logo-paw" aria-hidden="true"><use href="#paw"/></svg>
+        <span>tarun<b>.</b>rajai</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn--ink btn--sm nav-cta" href="#contact">Hire me <svg aria-hidden="true"><use href="#paw"/></svg></a>
+    </div>
+    <div class="yarn-track" aria-hidden="true"><span class="yarn-line"></span><span class="yarn-ball"></span></div>
+  </header>
 
-    <ul>
-        <li>
-            <strong>Bachelor of Engineering (B.E.)</strong><br>
-            SSEC 2021 - 2025<br>
-        </li>
-        <li>
-            <strong>12th Grade (Senior Secondary)</strong><br>
-            VDVS Year of Completion: 2021<br>
-        </li>
-        <li>
-            <strong>10th Grade (Secondary)</strong><br>
-            KPES Year of Completion: 2019<br>
-        </li>
-    </ul>
+  <main id="main">
+    <!-- ═════════════ Hero ═════════════ -->
+    <section class="hero wrap" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="chip pop">🎓 M.Tech CS @ IIIT Hyderabad · open to SDE roles</p>
+        <h1 id="hero-title" class="hero-title">
+          <span class="bounce">Hey, I'm</span>
+          <span class="name bounce">Tarun<span class="wave" aria-hidden="true">👋</span></span>
+        </h1>
+        <p class="hero-lede pop">
+          I build backend systems that stay correct when <strong>500 people hit “buy” at the same second.</strong>
+        </p>
+        <p class="hero-aside pop">My QA team is a cat named <b>Mutex</b>. She mostly tests the keyboard.</p>
+        <div class="cta-row pop">
+          <a class="btn btn--ginger" href="#projects">See my work →</a>
+          <a class="btn btn--line" href="#contact">Say hi</a>
+        </div>
+        <dl class="mini-stats pop">
+          <div><dt class="count" data-to="363" id="hero-lc">363</dt><dd>LeetCode solved</dd></div>
+          <div><dt>AIR <span class="count" data-to="114">114</span></dt><dd>PGEE 2025</dd></div>
+          <div><dt class="count" data-to="97.24" data-dec="2">97.24</dt><dd>GATE CS %ile</dd></div>
+          <div><dt class="count" data-to="0" data-from="50">0</dt><dd>hoodies oversold</dd></div>
+        </dl>
+      </div>
 
-    <h2>Skills</h2>
-    <ul>
-    <li>C++</li>
-    <li>Web Development</li>
-  </ul>
-  <script src="script.js"></script>
+      <div class="hero-cat">
+        <div class="bubble" id="bubble" aria-live="polite">mrrp?</div>
+        <button class="mutex-btn" id="mutex" type="button" aria-label="Pet Mutex the cat">
+          <svg class="mutex" viewBox="0 0 360 380" aria-hidden="true">
+            <!-- laptop lid -->
+            <rect x="40" y="148" width="280" height="180" rx="14" fill="#2b2420" stroke="#221c18" stroke-width="4"/>
+            <rect x="54" y="162" width="252" height="152" rx="7" fill="#17120f"/>
+            <g class="code-lines">
+              <rect x="66" y="178" width="40" height="6" rx="3" fill="#ff7a21"/><rect x="66" y="194" width="30" height="6" rx="3" fill="#8fd3a8"/>
+              <rect x="74" y="210" width="34" height="6" rx="3" fill="#e9e1d4"/><rect x="74" y="226" width="22" height="6" rx="3" fill="#ff8fab"/>
+              <rect x="66" y="242" width="38" height="6" rx="3" fill="#e9e1d4"/><rect x="66" y="258" width="26" height="6" rx="3" fill="#8fd3a8"/>
+              <text x="258" y="186" class="kkk">kkkkkk</text><text x="258" y="204" class="kkk">jjjjjjj</text><text x="262" y="222" class="kkk">;;;;;</text>
+            </g>
+            <!-- tail -->
+            <g id="tail" class="tail">
+              <path d="M240 318c62 2 80-56 58-92-12-20 0-40 20-36" fill="none" stroke="#221c18" stroke-width="27" stroke-linecap="round"/>
+              <path d="M240 318c62 2 80-56 58-92-12-20 0-40 20-36" fill="none" stroke="#ff8a35" stroke-width="19" stroke-linecap="round"/>
+              <path d="M300 214c-6-10-2-20 12-22" fill="none" stroke="#d65a0a" stroke-width="7" stroke-linecap="round"/>
+            </g>
+            <!-- body -->
+            <path d="M104 332c-12-68 20-124 76-128 56 4 88 60 76 128Z" fill="#ff8a35" stroke="#221c18" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M146 332c-6-40 12-68 34-68s40 28 34 68Z" fill="#fff1dc"/>
+            <path d="M112 282q14-4 22 4M110 304q14-4 22 4M248 282q-14-4-22 4M250 304q-14-4-22 4" stroke="#d65a0a" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <!-- collar + padlock tag -->
+            <path d="M126 220q54 26 108 0" stroke="#ff5f8f" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M173 240v-7a7 7 0 0 1 14 0v7" stroke="#8a6400" stroke-width="3.5" fill="none"/>
+            <rect x="168" y="238" width="24" height="18" rx="4" fill="#ffc233" stroke="#221c18" stroke-width="3"/>
+            <circle cx="180" cy="246" r="2.6" fill="#221c18"/>
+            <!-- head -->
+            <g id="head" class="head">
+              <g class="ear ear-l"><path d="M104 128 110 48l50 46Z" fill="#ff8a35" stroke="#221c18" stroke-width="4" stroke-linejoin="round"/><path d="M117 115l3-45 27 27Z" fill="#ff9fb2"/></g>
+              <g class="ear ear-r"><path d="M256 128 250 48l-50 46Z" fill="#ff8a35" stroke="#221c18" stroke-width="4" stroke-linejoin="round"/><path d="M243 115l-3-45-27 27Z" fill="#ff9fb2"/></g>
+              <ellipse cx="180" cy="150" rx="86" ry="70" fill="#ff8a35" stroke="#221c18" stroke-width="4"/>
+              <path d="M180 84v20M164 88l3 16M196 88l-3 16" stroke="#d65a0a" stroke-width="6" stroke-linecap="round"/>
+              <ellipse cx="180" cy="180" rx="36" ry="23" fill="#fff1dc"/>
+              <ellipse cx="116" cy="174" rx="14" ry="8" fill="#ff5f8f" opacity=".35"/>
+              <ellipse cx="244" cy="174" rx="14" ry="8" fill="#ff5f8f" opacity=".35"/>
+              <g class="eyes">
+                <g class="eye"><ellipse cx="146" cy="146" rx="18" ry="20" fill="#fff" stroke="#221c18" stroke-width="3.5"/><g class="pupil"><ellipse cx="146" cy="148" rx="9" ry="12" fill="#221c18"/><circle cx="142" cy="142" r="3.6" fill="#fff"/></g></g>
+                <g class="eye"><ellipse cx="214" cy="146" rx="18" ry="20" fill="#fff" stroke="#221c18" stroke-width="3.5"/><g class="pupil"><ellipse cx="214" cy="148" rx="9" ry="12" fill="#221c18"/><circle cx="210" cy="142" r="3.6" fill="#fff"/></g></g>
+              </g>
+              <g class="eyes-happy"><path d="M129 152q17-18 34 0M197 152q17-18 34 0" stroke="#221c18" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+              <g class="eyes-mad"><path d="M128 138l34 10M232 138l-34 10" stroke="#221c18" stroke-width="5" stroke-linecap="round"/><path d="M134 152h24M202 152h24" stroke="#221c18" stroke-width="5" stroke-linecap="round"/></g>
+              <path d="M171 168h18l-9 11Z" fill="#ff8fab" stroke="#221c18" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M180 179q0 11-12 13M180 179q0 11 12 13" stroke="#221c18" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <path d="M110 176l-40-8M110 185l-42 2M112 194l-38 10M250 176l40-8M250 185l42 2M248 194l38 10" stroke="#221c18" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <!-- paws + laptop base -->
+            <path d="M18 326h324l12 22q0 8-8 8H14q-8 0-8-8Z" fill="#dcd2c4" stroke="#221c18" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M150 346h60" stroke="#221c18" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+            <ellipse cx="152" cy="330" rx="25" ry="13" fill="#fff1dc" stroke="#221c18" stroke-width="4"/>
+            <ellipse cx="208" cy="330" rx="25" ry="13" fill="#fff1dc" stroke="#221c18" stroke-width="4"/>
+            <path d="M146 324v10M158 324v10M202 324v10M214 324v10" stroke="#221c18" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
+          </svg>
+        </button>
+        <p class="doodle hero-note">↑ this is Mutex. click to pet <span>(at your own risk)</span></p>
+      </div>
+    </section>
+
+    <!-- ═════════════ Marquee ═════════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Node.js</span><i></i><span>C++</span><i></i><span>PostgreSQL</span><i></i><span>MongoDB</span><i></i><span>Redis</span><i></i><span>RabbitMQ</span><i></i><span>React</span><i></i><span>zero oversold hoodies</span><i></i><span>1 cat</span><i></i>
+        <span>Node.js</span><i></i><span>C++</span><i></i><span>PostgreSQL</span><i></i><span>MongoDB</span><i></i><span>Redis</span><i></i><span>RabbitMQ</span><i></i><span>React</span><i></i><span>zero oversold hoodies</span><i></i><span>1 cat</span><i></i>
+      </div>
+    </div>
+
+    <!-- ═════════════ About ═════════════ -->
+    <section class="section wrap" id="about" aria-labelledby="about-title">
+      <p class="label reveal">$ cat about_me.txt</p>
+      <h2 id="about-title" class="section-title reveal">A little about me</h2>
+
+      <div class="bento">
+        <article class="card card--wide card--care reveal">
+          <p class="card-kicker">What I care about</p>
+          <p class="care-text">What a system does <mark>under contention</mark>: race conditions, partial failures, retries, and keeping two databases honest with each other.</p>
+          <div class="race-doodle" aria-hidden="true">
+            <svg class="racer r1"><use href="#cathead"/></svg>
+            <svg class="racer r2"><use href="#cathead"/></svg>
+            <span class="finish">📦</span>
+          </div>
+        </article>
+
+        <article class="card card--photo reveal">
+          <figure class="catpic" id="about-cat">
+            <div class="catpic-frame"><img alt="A random cat photo standing in for Mutex" loading="lazy" /></div>
+            <figcaption><b>Mutex</b>, allegedly. <span class="muted">A new photo every refresh; can't get a lock on her.</span></figcaption>
+          </figure>
+          <button class="icon-btn reroll" type="button" data-reroll="about-cat" aria-label="Show another cat">↻</button>
+        </article>
+
+        <article class="card reveal">
+          <p class="card-kicker">Now</p>
+          <h3 class="card-title">M.Tech, Computer Science</h3>
+          <p>IIIT Hyderabad · 2025–27</p>
+          <p class="pill-row"><span class="pill">CGPA 8.59</span></p>
+        </article>
+
+        <article class="card reveal">
+          <p class="card-kicker">Before</p>
+          <h3 class="card-title">B.E., Information Technology</h3>
+          <p>Shantilal Shah Engineering College, Bhavnagar · 2021–25</p>
+          <p class="pill-row"><span class="pill">CGPA 8.11</span></p>
+        </article>
+
+        <article class="card card--ginger reveal">
+          <p class="card-kicker">Looking for</p>
+          <h3 class="card-title">SDE, backend &amp; systems roles</h3>
+          <p>Based in Hyderabad, India. Happy to talk.</p>
+          <a class="link" href="#contact">Say hi →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═════════════ LeetCode ═════════════ -->
+    <section class="section wrap" id="leetcode" aria-labelledby="lc-title">
+      <p class="label reveal">while (true) solve();</p>
+      <h2 id="lc-title" class="section-title reveal">Problems solved on LeetCode</h2>
+
+      <div class="card lc-card reveal">
+        <div class="lc-left">
+          <p class="lc-big"><span class="count" id="lc-total" data-to="363">363</span></p>
+          <p class="lc-sub">problems solved <span class="lc-status" id="lc-status">· live</span></p>
+          <ul class="lc-bars">
+            <li><span>Easy</span><b class="bar"><i id="lc-easy-bar" style="--p:.086"></i></b><em id="lc-easy">83</em></li>
+            <li><span>Medium</span><b class="bar bar--med"><i id="lc-med-bar" style="--p:.11"></i></b><em id="lc-med">232</em></li>
+            <li><span>Hard</span><b class="bar bar--hard"><i id="lc-hard-bar" style="--p:.049"></i></b><em id="lc-hard">48</em></li>
+          </ul>
+        </div>
+        <div class="lc-right">
+          <div class="lc-head"><span>Last 26 weeks, in paw prints</span><span><b id="lc-days">186</b> active days this year</span></div>
+          <div class="paws" id="heatmap" role="img" aria-label="LeetCode submission activity over the last 26 weeks"></div>
+          <div class="lc-foot">
+            <p class="doodle">Mutex's count: 0. She sat on the keyboard once. Wrong Answer.</p>
+            <a class="link" href="https://leetcode.com/u/rajaiTarun/" target="_blank" rel="noopener">Full profile →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ Projects ═════════════ -->
+    <section class="section wrap" id="projects" aria-labelledby="projects-title">
+      <p class="label reveal">$ ls ~/projects</p>
+      <h2 id="projects-title" class="section-title reveal">Things I've built</h2>
+
+      <!-- MerchFlow -->
+      <article class="project card reveal" aria-labelledby="mf-title">
+        <header class="project-head">
+          <div>
+            <p class="card-kicker">Node.js microservices · built solo</p>
+            <h3 id="mf-title" class="project-title">MerchFlow</h3>
+          </div>
+          <div class="project-links">
+            <a class="btn btn--line btn--sm" href="https://github.com/RajaiTarun/MerchFlow" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="btn btn--ink btn--sm" href="https://frontend-6jke.onrender.com" target="_blank" rel="noopener">Live demo ↗</a>
+          </div>
+        </header>
+        <p class="project-lede">A campus merch-drop platform built for one scary moment: 500 students, one 50-unit hoodie, the same second. Inventory still lands on <strong>exactly zero</strong>.</p>
+        <ul class="chips-row" aria-label="MerchFlow at a glance">
+          <li><b>5</b> services</li><li><b>2</b> databases</li><li><b>1</b> broker</li><li><b>4</b> design patterns</li><li class="hot"><b>0</b> oversells</li>
+        </ul>
+
+        <div class="project-grid">
+          <!-- The Great Box Rush -->
+          <div class="rush" id="rush">
+            <div class="rush-head">
+              <div>
+                <h4>The Great Box Rush 📦</h4>
+                <p class="muted">50 boxes. 200 cats. What could go wrong?</p>
+              </div>
+              <div class="seg" role="radiogroup" aria-label="Checkout mode">
+                <button type="button" role="radio" aria-checked="true" data-mode="race">No lock</button>
+                <button type="button" role="radio" aria-checked="false" data-mode="lock">🔒 Mutex lock</button>
+              </div>
+            </div>
+            <div class="boxes" id="boxes" aria-hidden="true"></div>
+            <div class="rush-stats">
+              <div><span>Boxes left</span><b id="rush-left">50</b></div>
+              <div class="hiss"><span>2 cats, 1 box</span><b id="rush-over">0</b></div>
+              <div><span>Sulking 😾</span><b id="rush-away">0</b></div>
+            </div>
+            <div class="rush-foot">
+              <p id="rush-msg" aria-live="polite">Every cat checks for a free box, then jumps in a bit later. No lock.</p>
+              <button class="btn btn--ginger btn--sm" id="rush-run" type="button">Open the boxes ▶</button>
+            </div>
+            <p class="rush-note">Same bug as an oversold hoodie, with more fur. MerchFlow fixes it with a real lock.</p>
+          </div>
+
+          <div class="inside">
+            <h4>What's inside</h4>
+            <ul class="ticks">
+              <li><b>Valkey (Redis) distributed locks</b>: <code>SET NX PX</code> plus a token-bound Lua release, and atomic MongoDB stock decrements</li>
+              <li><b>Saga pattern</b> with retry-with-backoff compensating transactions when payment fails</li>
+              <li><b>Idempotency keys</b> so a double-click never orders twice</li>
+              <li><b>Polyglot data</b>: PostgreSQL for orders, MongoDB for the catalog, RabbitMQ for notifications</li>
+              <li><b>Zero-trust gateway</b> with JWT and RBAC. Found and fixed an IDOR and a cache-key bug</li>
+              <li><b>React 19 SPA</b>, Docker, and all 6 services deployed on Render</li>
+            </ul>
+            <ul class="tags">
+              <li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>MongoDB</li><li>Valkey</li><li>RabbitMQ</li><li>React</li><li>Docker</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- POSIX shell -->
+      <article class="project card reveal" aria-labelledby="px-title">
+        <header class="project-head">
+          <div>
+            <p class="card-kicker">C++11 · operating systems · built solo</p>
+            <h3 id="px-title" class="project-title">POSIX Shell</h3>
+          </div>
+          <div class="project-links">
+            <a class="btn btn--line btn--sm" href="https://github.com/RajaiTarun/POSIX" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </header>
+        <p class="project-lede">A Unix shell written from scratch in C++. No bash underneath, just <code>fork</code>, <code>exec</code>, <code>pipe</code>, <code>dup2</code> and a lot of careful signal handling.</p>
+
+        <div class="project-grid project-grid--flip">
+          <div class="term-wrap">
+            <svg class="loaf" viewBox="0 0 200 150" aria-hidden="true">
+              <g class="loaf-tail"><path d="M166 80c16 16 4 34 16 56" stroke="#221c18" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M166 80c16 16 4 34 16 56" stroke="#8e8781" stroke-width="9" fill="none" stroke-linecap="round"/></g>
+              <path d="M30 82c-4-34 26-52 80-52 50 0 70 22 66 52Z" fill="#8e8781" stroke="#221c18" stroke-width="3.5" stroke-linejoin="round"/>
+              <path d="M96 38q6 10 2 22M118 36q6 10 2 22M140 40q5 10 1 20" stroke="#6d6660" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <path d="M28 44 30 16l20 14ZM76 44 74 16 54 30Z" fill="#8e8781" stroke="#221c18" stroke-width="3" stroke-linejoin="round"/>
+              <ellipse cx="52" cy="52" rx="30" ry="24" fill="#8e8781" stroke="#221c18" stroke-width="3.5"/>
+              <path d="M36 50q6 6 12 0M56 50q6 6 12 0" stroke="#221c18" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M49 60h6l-3 3.5Z" fill="#ff8fab"/>
+              <ellipse cx="48" cy="80" rx="14" ry="6" fill="#d9d3cc" stroke="#221c18" stroke-width="3"/>
+              <text class="zzz" x="84" y="20">z</text><text class="zzz z2" x="96" y="10">z</text>
+            </svg>
+            <div class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>./a.out</span></div>
+              <pre class="term-body" id="posix-term"></pre>
+            </div>
+            <p class="doodle term-note">fork() makes kittens. don't @ me.</p>
+          </div>
+
+          <div class="inside">
+            <h4>What's inside</h4>
+            <ul class="ticks">
+              <li><b>N-stage pipelines</b> and <code>&lt;</code> <code>&gt;</code> <code>&gt;&gt;</code> redirection, via chained <code>pipe</code> + <code>dup2</code></li>
+              <li><b>Job control</b>: foreground and background jobs, with zombies reaped by <code>waitpid(-1, WNOHANG)</code></li>
+              <li><b>Async-signal-safe</b> Ctrl+C handling. Ctrl+Z suspends only the child, never the shell</li>
+              <li><b>Built-ins</b> including <code>pinfo</code>, which reads live <code>/proc/&lt;pid&gt;</code> data</li>
+              <li><b>A deliberate trade-off</b>: canonical-mode I/O over readline, after finding a signal-safety race</li>
+            </ul>
+            <ul class="tags">
+              <li>C++11</li><li>POSIX</li><li>Linux</li><li>IPC</li><li>Signals</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ═════════════ Skills ═════════════ -->
+    <section class="section wrap" id="skills" aria-labelledby="skills-title">
+      <p class="label reveal">$ cat skills.json</p>
+      <div class="skills-head reveal">
+        <h2 id="skills-title" class="section-title">What I work with</h2>
+        <div class="seg seg--big" role="radiogroup" aria-label="Skill view">
+          <button type="button" role="radio" aria-checked="true" data-view="human">👤 Human mode</button>
+          <button type="button" role="radio" aria-checked="false" data-view="cat">🐱 Cat mode</button>
+        </div>
+      </div>
+
+      <div class="skill-groups" id="skill-groups">
+        <div class="card skill-group reveal">
+          <h3 data-cat="Vocal range">Languages</h3>
+          <ul class="skill-chips">
+            <li data-cat="Meow">C++</li><li data-cat="Mrrp">C</li><li data-cat="Hiss">JavaScript</li>
+          </ul>
+        </div>
+        <div class="card skill-group reveal">
+          <h3 data-cat="Core competencies">Backend &amp; data</h3>
+          <ul class="skill-chips">
+            <li data-cat="Knocking mugs off desks">Node.js</li><li data-cat="16-hour naps">Express</li><li data-cat="Sitting in boxes">PostgreSQL</li>
+            <li data-cat="Ignoring my name">MongoDB</li><li data-cat="3am zoomies">Redis</li><li data-cat="Keyboard walking">RabbitMQ</li>
+          </ul>
+        </div>
+        <div class="card skill-group reveal">
+          <h3 data-cat="Aesthetics">Frontend</h3>
+          <ul class="skill-chips">
+            <li data-cat="Being cute">React</li><li data-cat="Slow blinks">Tailwind CSS</li><li data-cat="Loafing">Vite</li>
+          </ul>
+        </div>
+        <div class="card skill-group reveal">
+          <h3 data-cat="Advanced techniques">Tools &amp; CS</h3>
+          <ul class="skill-chips">
+            <li data-cat="git push (things off tables)">Git</li><li data-cat="Fits in any container">Docker</li><li data-cat="Sleeps on the laptop">Linux</li>
+            <li data-cat="Distrusts strangers">JWT auth</li><li data-cat="Chasing pointers">DSA</li><li data-cat="sleep(57600)">Operating systems</li>
+            <li data-cat="In every room at once">Distributed systems</li><li data-cat="Designs for treats">System design</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="board">
+        <div class="board-head reveal">
+          <h3 class="board-title">My code review board</h3>
+          <button class="btn btn--line btn--sm" type="button" id="reshuffle">Hire new reviewers ↻</button>
+        </div>
+        <div class="polaroids">
+          <figure class="polaroid catpic reveal" data-note="LGTM 👍 (did not read it)">
+            <div class="catpic-frame"><img alt="A random cat, credited as Senior Reviewer" loading="lazy" /></div>
+            <figcaption><b>Senior Reviewer</b><span class="doodle">LGTM 👍 (did not read it)</span></figcaption>
+          </figure>
+          <figure class="polaroid catpic reveal">
+            <div class="catpic-frame"><img alt="A random cat, credited as Head of QA" loading="lazy" /></div>
+            <figcaption><b>Head of QA</b><span class="doodle">knocked prod off the table</span></figcaption>
+          </figure>
+          <figure class="polaroid catpic reveal">
+            <div class="catpic-frame"><img alt="A random cat, credited as On-call Engineer" loading="lazy" /></div>
+            <figcaption><b>On-call</b><span class="doodle">asleep. do not page.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ Stats ═════════════ -->
+    <section class="section wrap" id="stats" aria-labelledby="stats-title">
+      <p class="label reveal">$ tail achievements.log</p>
+      <h2 id="stats-title" class="section-title reveal">Numbers I'm proud of</h2>
+      <div class="stats">
+        <div class="card stat reveal"><p class="stat-num">AIR <span class="count" data-to="114">114</span></p><p class="stat-what">IIIT Hyderabad PGEE 2025</p><p class="muted">Got me into the M.Tech CS program</p></div>
+        <div class="card stat stat--ginger reveal"><p class="stat-num"><span class="count" data-to="97.24" data-dec="2">97.24</span></p><p class="stat-what">GATE CS 2025 percentile</p><p class="muted">Top 3% of 100,000+ candidates</p></div>
+        <div class="card stat reveal"><p class="stat-num">✓ DA</p><p class="stat-what">GATE DA 2025</p><p class="muted">Qualified</p></div>
+        <div class="card stat reveal"><p class="stat-num">✓ CS</p><p class="stat-what">GATE CS 2024</p><p class="muted">Qualified</p></div>
+      </div>
+      <p class="doodle stats-note reveal">Mutex's rank: #1 in the house. Unopposed.</p>
+    </section>
+
+    <!-- ═════════════ Contact ═════════════ -->
+    <section class="section wrap" id="contact" aria-labelledby="contact-title">
+      <p class="label reveal">$ ping tarun</p>
+      <h2 id="contact-title" class="section-title reveal">Say hi 👋</h2>
+      <div class="contact card reveal">
+        <div class="contact-copy">
+          <p class="contact-lede">Open to SDE, backend and systems roles. Mutex screens every email, but she can't read, so they come straight to me.</p>
+          <a class="big-mail" href="mailto:tarunkrajai@gmail.com">tarunkrajai@gmail.com</a>
+          <div class="socials">
+            <a class="social" href="https://github.com/RajaiTarun" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>GitHub</a>
+            <a class="social" href="https://www.linkedin.com/in/tarun-rajai-iiith/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4V9.5Z"/></svg>LinkedIn</a>
+            <a class="social" href="https://leetcode.com/u/rajaiTarun/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2.2a1.2 1.2 0 0 1 1.7 1.7L9.8 9.3a3.5 3.5 0 0 0 0 5l3.9 3.9a3.5 3.5 0 0 0 5 0l1.9-1.9a1.2 1.2 0 1 1 1.7 1.7l-1.9 1.9a5.9 5.9 0 0 1-8.4 0l-3.9-3.9a5.9 5.9 0 0 1 0-8.4l5.4-5.4ZM11 12.3h9.3a1.2 1.2 0 1 1 0 2.4H11a1.2 1.2 0 0 1 0-2.4Z"/></svg>LeetCode</a>
+          </div>
+        </div>
+
+        <form class="mail-form" id="mail-form" novalidate>
+          <div class="row2">
+            <label>Your name<input name="name" type="text" autocomplete="name" placeholder="Jane Doe" required /></label>
+            <label>Your email<input name="email" type="email" autocomplete="email" placeholder="jane@company.com" required /></label>
+          </div>
+          <label>Message<textarea name="message" rows="4" placeholder="We're hiring and we have snacks…" required></textarea></label>
+          <div class="form-foot">
+            <span class="form-note" id="form-note">Opens your mail app</span>
+            <span class="send-wrap">
+              <svg class="send-paw" aria-hidden="true"><use href="#paw"/></svg>
+              <button class="btn btn--ink" type="submit">Send it →</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═════════════ Footer ═════════════ -->
+  <footer class="footer" id="footer">
+    <div class="wrap foot-inner">
+      <svg class="curl" viewBox="0 0 160 90" aria-hidden="true">
+        <path d="M18 74c-8-34 22-56 62-56s66 20 62 50c-2 10-14 14-30 14H38c-12 0-18-2-20-8Z" fill="#ff8a35" stroke="#221c18" stroke-width="3.5"/>
+        <path d="M60 22q4 10 0 20M80 18q4 10 0 22M100 22q4 10 0 20" stroke="#d65a0a" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M30 60 26 36l18 12Z" fill="#ff8a35" stroke="#221c18" stroke-width="3" stroke-linejoin="round"/>
+        <ellipse cx="44" cy="64" rx="24" ry="18" fill="#ff8a35" stroke="#221c18" stroke-width="3.5"/>
+        <path d="M32 62q5 5 10 0M48 62q5 5 10 0" stroke="#221c18" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M130 74c10-2 18 8 6 12H70" stroke="#221c18" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path d="M130 74c10-2 18 8 6 12H70" stroke="#ff8a35" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <text class="zzz" x="70" y="12">z</text><text class="zzz z2" x="82" y="4">z</text>
+      </svg>
+      <p class="foot-name">Tarun Rajai</p>
+      <p class="foot-sub">Backend &amp; systems engineer · Hyderabad, India</p>
+      <ul class="foot-links">
+        <li><a href="https://github.com/RajaiTarun" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/tarun-rajai-iiith/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://leetcode.com/u/rajaiTarun/" target="_blank" rel="noopener">LeetCode</a></li>
+        <li><a href="mailto:tarunkrajai@gmail.com">Email</a></li>
+      </ul>
+      <p class="foot-fine">© <span id="year">2026</span> · built with JavaScript, stubbornness and cat hair · psst, type <kbd>meow</kbd></p>
+    </div>
+  </footer>
+
+  <!-- ═════════════ Floating bits ═════════════ -->
+  <button class="cat-break" id="cat-break" type="button" aria-haspopup="dialog">
+    <svg aria-hidden="true"><use href="#cathead"/></svg><span>Cat break</span>
+  </button>
+
+  <dialog class="gif-modal" id="gif-modal" aria-labelledby="gif-title">
+    <div class="gif-inner">
+      <p class="card-kicker" id="gif-title">Mandatory cat break</p>
+      <div class="gif-frame"><img id="gif-img" alt="A random animated cat GIF" /></div>
+      <p class="doodle" id="gif-caption">this one reviews pull requests</p>
+      <div class="gif-actions">
+        <button class="btn btn--ginger btn--sm" type="button" id="gif-next">Another one ↻</button>
+        <button class="btn btn--line btn--sm" type="button" id="gif-close">Back to work</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="peek" id="peek" aria-hidden="true">
+    <span class="peek-bubble">…hi</span>
+    <svg viewBox="0 0 120 90">
+      <path d="M22 50 24 10l26 22ZM98 50 96 10 70 32Z" fill="#ff8a35" stroke="#221c18" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M30 42 32 20l14 12ZM90 42 88 20 74 32Z" fill="#ff9fb2"/>
+      <ellipse cx="60" cy="60" rx="44" ry="36" fill="#ff8a35" stroke="#221c18" stroke-width="3.5"/>
+      <circle class="pk-eye" cx="44" cy="56" r="7" fill="#221c18"/><circle class="pk-eye" cx="76" cy="56" r="7" fill="#221c18"/>
+      <circle cx="42" cy="53" r="2.2" fill="#fff"/><circle cx="74" cy="53" r="2.2" fill="#fff"/>
+      <path d="M55 68h10l-5 6Z" fill="#ff8fab"/>
+      <ellipse cx="28" cy="88" rx="16" ry="9" fill="#fff1dc" stroke="#221c18" stroke-width="3"/>
+      <ellipse cx="92" cy="88" rx="16" ry="9" fill="#fff1dc" stroke="#221c18" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <script src="main.js" defer></script>
 </body>
-
 </html>
