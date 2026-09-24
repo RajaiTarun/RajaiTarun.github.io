@@ -32,7 +32,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0; overflow-x: hidden;
+  margin: 0; overflow-x: clip;
   background: var(--cream);
   background-image: radial-gradient(rgba(34, 28, 24, .07) 1.2px, transparent 1.3px);
   background-size: 22px 22px;
@@ -90,6 +90,15 @@ mark { background: linear-gradient(transparent 55%, rgba(255, 122, 33, .45) 55%)
 .nav-links { display: flex; gap: 6px; }
 .nav-links a { display: block; padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background .2s, color .2s; }
 .nav-links a:hover, .nav-links a.active { background: var(--ink); color: var(--cream); }
+.burger { display: none; position: relative; width: 46px; height: 42px; flex: none; border: 2.5px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 2px 2px 0 var(--ink); cursor: pointer; transition: transform .2s var(--bounce), background .2s; }
+.burger:active { transform: translate(2px, 2px); box-shadow: none; }
+.burger span { position: absolute; left: 10px; right: 10px; height: 2.5px; border-radius: 2px; background: var(--ink); transition: top .25s var(--ease), transform .3s var(--bounce), opacity .15s; }
+.burger span:nth-child(1) { top: 11px; } .burger span:nth-child(2) { top: 17.5px; } .burger span:nth-child(3) { top: 24px; }
+.nav.open .burger { background: var(--ginger); }
+.nav.open .burger span:nth-child(1) { top: 17.5px; transform: rotate(45deg); }
+.nav.open .burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav.open .burger span:nth-child(3) { top: 17.5px; transform: rotate(-45deg); }
+.mobile-menu { display: none; }
 .yarn-track { position: absolute; left: 0; right: 0; bottom: -2.5px; height: 2.5px; pointer-events: none; }
 .yarn-line { position: absolute; left: 0; top: 0; height: 3px; width: calc(var(--p, 0) * 100%); background: var(--ginger); }
 .yarn-ball {
@@ -436,11 +445,26 @@ kbd { font: 600 13px var(--f-mono); background: #3a322d; color: var(--cream); pa
 @media (max-width: 720px) {
   :root { --gutter: 16px; --r: 18px; --shadow: 4px 4px 0 var(--ink); }
   body { font-size: 16px; }
-  .nav-inner { height: 58px; gap: 10px; }
-  .logo span { display: none; }
-  .nav-links { gap: 0; margin-left: auto; }
-  .nav-links a { padding: 7px 9px; font-size: 13.5px; }
-  .nav-cta { display: none; }
+  .nav-inner { height: 62px; gap: 10px; }
+  .nav-inner > nav, .nav-cta { display: none; }
+  .burger { display: block; }
+  .mobile-menu {
+    display: block; position: absolute; top: 100%; left: 0; right: 0; z-index: -1;
+    padding: 14px var(--gutter) 22px; background: var(--cream);
+    border-bottom: 2.5px solid var(--ink); box-shadow: 0 14px 0 rgba(34, 28, 24, .08);
+    transform: translateY(-12px); opacity: 0; visibility: hidden;
+    transition: transform .35s var(--bounce), opacity .2s, visibility 0s .35s;
+  }
+  .nav.open .mobile-menu { transform: none; opacity: 1; visibility: visible; transition: transform .35s var(--bounce), opacity .2s; }
+  .mobile-menu ul { display: grid; margin-bottom: 18px; }
+  .mobile-menu li + li { border-top: 2px dashed var(--line); }
+  .mobile-menu ul a { display: flex; align-items: center; justify-content: space-between; padding: 13px 4px; text-decoration: none; font: 800 27px/1.1 var(--f-display); font-variation-settings: "SOFT" 100, "WONK" 1; letter-spacing: -.02em; }
+  .mobile-menu ul a::after { content: "→"; font: 700 20px var(--f-body); color: var(--ink-faint); transition: transform .25s var(--bounce), color .2s; }
+  .mobile-menu ul a:active::after, .mobile-menu ul a.active::after { color: var(--ginger); transform: translateX(4px); }
+  .mobile-menu ul a.active { color: var(--ginger-deep); }
+  .mobile-menu .btn { width: 100%; }
+  .nav.open .mobile-menu li { animation: menuIn .4s var(--bounce) both; }
+  .nav.open .mobile-menu li:nth-child(2) { animation-delay: .04s; } .nav.open .mobile-menu li:nth-child(3) { animation-delay: .08s; } .nav.open .mobile-menu li:nth-child(4) { animation-delay: .12s; }
   .hero-cat { max-width: 280px; }
   .bubble { font-size: 21px; padding: 8px 12px; left: -8px; }
   .hero-title { margin: 16px 0; }
@@ -477,3 +501,5 @@ kbd { font: 600 13px var(--f-mono); background: #3a322d; color: var(--cream); pa
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
   .reveal, .pop, .hero-title .bounce, .hero-cat, .paws i, .bar i { opacity: 1 !important; transform: none !important; }
 }
+
+@keyframes menuIn { from { opacity: 0; transform: translateX(-14px); } }

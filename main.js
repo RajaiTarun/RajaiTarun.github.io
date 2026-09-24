@@ -81,7 +81,21 @@
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  const navLinks = $$('.nav-links a');
+  const navLinks = $$('.nav-links a, .mobile-menu ul a');
+
+  // Burger menu (phones).
+  const nav = $('#nav'), burger = $('#burger'), menu = $('#mobile-menu');
+  const setMenu = (open) => {
+    nav.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.inert = !open;
+  };
+  burger.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+  $$('a', menu).forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); burger.focus(); } });
+  document.addEventListener('click', (e) => { if (nav.classList.contains('open') && !nav.contains(e.target)) setMenu(false); });
+  matchMedia('(min-width: 721px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
   const NAV_FOR = { leetcode: 'about', stats: 'skills', top: '', footer: 'contact' };
   const secIO = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
